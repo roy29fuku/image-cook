@@ -1,0 +1,5 @@
+*.pyc
+.idea/*
+.DS_Store
+local_settings.py
+.python-version
