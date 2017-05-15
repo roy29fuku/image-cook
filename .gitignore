@@ -5,3 +5,6 @@ local_settings.py
 .python-version
 db.sqlite3
 .swp
+.jpg
+.png
+.gif
