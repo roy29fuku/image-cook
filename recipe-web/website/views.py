@@ -8,13 +8,12 @@ def index(request):
         'website/index.html',
     )
 
-def books(request):
-    books = Book.objects.all()
-    context = {
-        'books': books,
-    }
+def recipes(request):
+    # context = {
+    #     'books': books,
+    # }
     return render(
         request,
-        'website/books.html',
-        context,
+        'website/recipes.html',
+        # context,
     )

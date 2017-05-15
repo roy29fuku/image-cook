@@ -1,2 +1,10 @@
-hello, world!
+<h1>Recipe Reccomender</h1>
+<form enctype="multipart/form-data" action="/upload/" method="post">
+    <p>画像:</p>
+    <input type="file" name="pic">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <input type="submit" value="submit" />
+</form>
 
