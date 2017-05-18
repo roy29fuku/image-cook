@@ -1,1 +1,37 @@
-recipes
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>おすすめレシピ</h1>
+        <div>
+            {{title}}
+        </div>
+        <div>
+            <p>材料</p>
+            {% for ingredient in ingr %}
+            <div>
+                {% for i in ingredient %}
+                {{ i }}
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <img src="{{img}}
+">
+        </div>
+        <div>
+            <P>作り方</P>
+            <ol>
+                {% for how in howto %}
+                    <li>
+                        {{how}}
+                    </li>
+                {% endfor %}
+            </ol>
+
+        </div>
+    </body>
+</html>
