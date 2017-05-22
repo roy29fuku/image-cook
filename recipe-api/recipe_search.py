@@ -1,47 +1,3 @@
-from django.shortcuts import render
-from core.models import Book
-import json
-import pymysql.cursors
-
-# Create your views here.
-
-def index(request):
-    return render(
-        request,
-        'website/index.html',
-    )
-
-def recipes(request):
-    jsonScript = '''{
-        "title": "にんじんにんじん",
-        "ingr": [
-            [
-                "にんじん",
-                "1本"
-            ],
-            [
-                "塩",
-                "大さじ1"
-            ],
-            [
-                "砂糖",
-                "大さじ4"
-            ]
-        ],
-        "img": "http://hogehoge.com",
-        "howto": [
-            "にんじんの皮を剥きます",
-            "塩をかけます"
-        ]
-    }'''
-
-    data =json.loads(jsonScript)
-    return render(
-        request,
-        'website/recipes.html',
-        data,
-    )
-
 import json
 import pymysql.cursors
 
@@ -86,3 +42,10 @@ def search(S):
     connection.close()
 
     return jsonstring
+
+if __name__=='__main__':
+    print(search("にんじん"))
+    print(search("たまねぎ"))
+    print(search("かぶ"))
+    print(search("トマト"))
+    print(search("キャベツ"))
