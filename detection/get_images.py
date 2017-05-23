@@ -5,8 +5,10 @@ from urllib.parse import urlparse
 
 
 '''
-bingの画像検索から取ってくる
+bing, googleの画像検索から画像を取ってくる
 '''
+
+images_dir = 'images/'
 qs = [
     'carrot',
     'onion',
@@ -14,11 +16,6 @@ qs = [
     'tomato',
     'cabbage',
 ]
-
-azure_id = 'b588d68f-d1cd-49df-9d12-ab23240b7c8d'
-azure_key = 'nfO3Wotbs4CIaRt3aT+Anv1zTTBIXy4oxhGqdiAUBl4'
-images_dir = 'images/'
-
 
 for q in qs:
     print(q)
