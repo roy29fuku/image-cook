@@ -1,0 +1,36 @@
+.title{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.ingr {
+    width: 500px;
+    border: solid 3px orange;
+    border-radius: 10px;
+    margin: 0 0 10px 30px;
+    float: left;
+
+}
+
+.ingr li {
+    border-bottom: solid 1px black;
+}
+
+
+.food {
+    float: right;
+    max-width: 800px;
+    margin-right: 60px;
+}
+
+.how {
+    width: 500px;
+    border: solid 3px orange;
+    border-radius: 10px;
+    float: left;
+    margin: 0 0 10px 30px;
+}
+
+.how li {
+    border-bottom: solid 1px black;
+}
