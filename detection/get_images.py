@@ -36,3 +36,4 @@ for q in qs:
         image_file = open(images_dir + q + '/' + file_name + '.jpg', 'wb')
         image_file.write(image.read())
         image_file.close()
+
