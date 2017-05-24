@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from core.models import Book
 import random
 import json
 import pymysql.cursors
@@ -11,6 +10,12 @@ def index(request):
     )
 
 def recipes(request):
+    if not request.method == 'POST':
+        return render(
+            request,
+            'website/index.html',
+        )
+    print(request.FILES)
     recipe_json = search('たまねぎ')
     context = json.loads(recipe_json)
     return render(
@@ -22,7 +27,6 @@ def recipes(request):
 
 def search(S):
     # cf. search("たまねぎ")
-    #
     connection = pymysql.connect(host='localhost',
                                  user='ingre',
                                  password='ingreingre',
