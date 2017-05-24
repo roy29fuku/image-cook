@@ -2,6 +2,7 @@
 画像を水増しする。
 角度変えたり、反転させたり。
 参考書籍: Pythonによるスクレイピング&機械学習 開発テクニック BeautifulSoup,scikit-learn,TensorFlowを使ってみよう
+src: gyudon-makedata2.py
 '''
 
 import glob
@@ -55,7 +56,7 @@ def make_sample(files, is_train):
         add_sample(cat, fname, is_train)
     return np.array(X), np.array(Y)
 
-# ディレクトリごとに分けられたファイルを収集する --- (※2)
+# ディレクトリごとに分けられたファイルを収集する
 allfiles = []
 for idx, cat in enumerate(categories):
     image_dir = load_dir + "/" + cat
@@ -63,7 +64,7 @@ for idx, cat in enumerate(categories):
     for f in files:
         allfiles.append((idx, f))
 
-# シャッフルして学習データとテストデータに分ける --- (※3)
+# シャッフルして学習データとテストデータに分ける
 random.shuffle(allfiles)
 th = math.floor(len(allfiles) * 0.6)
 train = allfiles[0:th]

@@ -3,8 +3,6 @@ from core.models import Book
 import json
 import pymysql.cursors
 
-# Create your views here.
-
 def index(request):
     return render(
         request,
@@ -42,8 +40,6 @@ def recipes(request):
         data,
     )
 
-import json
-import pymysql.cursors
 
 def search(S):
     # cf. search("たまねぎ")

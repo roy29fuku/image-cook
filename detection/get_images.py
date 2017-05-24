@@ -1,12 +1,12 @@
+'''
+bing, googleの画像検索から画像を取ってくる
+'''
+# TODO: 余裕があったら汎用性を持たせる
+
 import urllib.request
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-
-
-'''
-bing, googleの画像検索から画像を取ってくる
-'''
 
 images_dir = 'images/'
 qs = [
