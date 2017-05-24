@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import Book
+import random
 import json
 import pymysql.cursors
 
@@ -10,47 +11,23 @@ def index(request):
     )
 
 def recipes(request):
-    jsonScript = '''{
-        "title": "にんじんにんじん",
-        "ingr": [
-            [
-                "にんじん",
-                "1本"
-            ],
-            [
-                "塩",
-                "大さじ1"
-            ],
-            [
-                "砂糖",
-                "大さじ4"
-            ]
-        ],
-        "img": "https://d35omnrtvqomev.cloudfront.net/photo/article/article_part/image_path_1/71111/555860013b0ff5b05bdd7000afd1fd.jpg",
-        "howto": [
-            "にんじんの皮を剥きます",
-            "塩をかけます"
-        ]
-    }'''
-
-    data =json.loads(jsonScript)
+    recipe_json = search('たまねぎ')
+    context = json.loads(recipe_json)
     return render(
         request,
         'website/recipes.html',
-        data,
+        context,
     )
 
 
 def search(S):
     # cf. search("たまねぎ")
-    # json形式で返す
+    #
     connection = pymysql.connect(host='localhost',
-                                 user='root',
-                                 password='',
-                                 db='kisopro',
+                                 user='ingre',
+                                 password='ingreingre',
+                                 db='ingre',
                                  charset='utf8',
-                                 # cursorclassを指定することで
-                                 # Select結果をtupleではなくdictionaryで受け取れる
                                  cursorclass=pymysql.cursors.DictCursor)
     cursor = connection.cursor()
 
@@ -61,7 +38,9 @@ def search(S):
     res = {}
 
     cursor.execute(ingr_search,'%'+S+'%')
-    recipe_id = cursor.fetchone()["recipe_id"]
+    recipe_ids = cursor.fetchall()
+    random.shuffle(recipe_ids)
+    recipe_id = recipe_ids.pop()["recipe_id"]
 
     cursor.execute(recipe_search,recipe_id)
     recipe_info = cursor.fetchone()
