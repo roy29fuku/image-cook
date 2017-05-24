@@ -1,7 +1,8 @@
-from django.shortcuts import render
 import random
 import json
 import pymysql.cursors
+from django.shortcuts import render
+from .models import ImageFile
 
 def index(request):
     return render(
@@ -15,7 +16,10 @@ def recipes(request):
             request,
             'website/index.html',
         )
-    print(request.FILES)
+    image = ImageFile()
+    image.title = request.FILES['pic'].name
+    image.data = request.FILES['pic']
+    image.save()
     recipe_json = search('たまねぎ')
     context = json.loads(recipe_json)
     return render(
