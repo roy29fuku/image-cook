@@ -2,17 +2,37 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'website/style.css' %}" />
+        <script type="text/javascript"
+                src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        {% load static %}
+        <script type="text/javascript" src="{% static 'website/script.js' %}"></script>
     </head>
     <body>
-        <h1>Recipe Recommender</h1>
-        <form enctype="multipart/form-data" action="/upload/" method="post">
-            <p>画像:</p>
-            <input type="file" name="pic">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <br>
-            <input type="submit" value="submit" />
-        </form>
+        <header>
+
+        </header>
+        <div class="top-wrapper">
+            <div class="bkrgba">
+                <h1 class="title">Recipe Recommender</h1>
+                <div class="summary">
+                    冷蔵庫の画像から食材を認識し、
+                    <br>
+                    オススメのレシピを紹介します。
+                </div>
+            </div>
+        </div>
+        <div class="upload-wrapper">
+            <form enctype="multipart/form-data" action="/recipes/" method="post">
+                <p class="image-select">画像を選択する</p>
+                <input type="file" name="pic">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br>
+                <input type="submit" value="確定" />
+            </form>
+            <div class="preview"></div>
+        </div>
     </body>
 </html>

@@ -26,7 +26,7 @@ def recipes(request):
                 "大さじ4"
             ]
         ],
-        "img": "http://hogehoge.com",
+        "img": "https://d35omnrtvqomev.cloudfront.net/photo/article/article_part/image_path_1/71111/555860013b0ff5b05bdd7000afd1fd.jpg",
         "howto": [
             "にんじんの皮を剥きます",
             "塩をかけます"

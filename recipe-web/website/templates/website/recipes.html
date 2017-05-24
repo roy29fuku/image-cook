@@ -2,26 +2,30 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'website/recipes.css' %}" />
     </head>
     <body>
         <h1>おすすめレシピ</h1>
-        <div>
+        <div class="title">
             {{title}}
         </div>
-        <div>
+        <div class="ingr">
             <p>材料</p>
-            {% for ingredient in ingr %}
-            <div>
-                {% for i in ingredient %}
-                {{ i }}
+                <ul>
+                {% for ingredient in ingr %}
+                <li>
+                    {% for i in ingredient %}
+                    {{ i }}
+                    {% endfor %}
+                </li>
                 {% endfor %}
-            </div>
-            {% endfor %}
+            </ul>
         </div>
-        <div>
+        <div class="food">
             <img src="{{img}}">
         </div>
-        <div>
+        <div class="how">
             <P>作り方</P>
             <ol>
                 {% for how in howto %}
