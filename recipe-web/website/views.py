@@ -1,25 +1,33 @@
 import random
 import json
 import pymysql.cursors
+from PIL import Image
+import numpy as np
 from django.shortcuts import render
 from .models import ImageFile
 
 def index(request):
-    return render(
-        request,
-        'website/index.html',
-    )
+    return render(request, 'website/index.html')
 
 def recipes(request):
     if not request.method == 'POST':
-        return render(
-            request,
-            'website/index.html',
-        )
+        return render(request, 'website/index.html')
     image = ImageFile()
     image.title = request.FILES['pic'].name
     image.data = request.FILES['pic']
     image.save()
+    fname = image.data
+    image_size = 50
+
+    img = Image.open(fname)
+    img = img.convert("RGB")
+    img = img.resize((image_size, image_size))
+    in_data = np.asarray(img)
+    print(in_data)
+
+
+
+
     recipe_json = search('たまねぎ')
     context = json.loads(recipe_json)
     return render(
@@ -27,7 +35,6 @@ def recipes(request):
         'website/recipes.html',
         context,
     )
-
 
 def search(S):
     # cf. search("たまねぎ")
@@ -58,7 +65,7 @@ def search(S):
 
     cursor.execute(get_all_ingr,recipe_id)
     recipe_ingrs = cursor.fetchall()
-    res["ingr"]=[]
+    res["ingr"] = []
 
     for ingr in recipe_ingrs:
         res["ingr"].append((ingr["name"],ingr["quantity"]))
