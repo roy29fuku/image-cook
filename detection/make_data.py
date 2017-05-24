@@ -41,7 +41,7 @@ def add_sample(cat, fname, is_train):
         data = np.asarray(img2)
         X.append(data)
         Y.append(cat)
-        img2.save(save_dir+'/'+dir_name+file_name+'-'+str(ang)+'.png')
+        # img2.save(save_dir+'/'+dir_name+file_name+'-'+str(ang)+'.png')
         # 反転する
         print(save_dir+'test/'+dir_name+file_name+'-'+str(ang)+'.png')
         img2 = img2.transpose(Image.FLIP_LEFT_RIGHT)
@@ -70,7 +70,7 @@ th = math.floor(len(allfiles) * 0.6)
 train = allfiles[0:th]
 test = allfiles[th:]
 X_train, y_train = make_sample(train, True)
-X_test, y_test = make_sample(test, True)
+X_test, y_test = make_sample(test, False)
 xy = (X_train, X_test, y_train, y_test)
 np.save("./images/ingredients.npy", xy)
 print("ok,", len(y_train))
