@@ -1,5 +1,6 @@
 import random
 import json
+import requests
 import pymysql.cursors
 from PIL import Image
 import numpy as np
@@ -27,8 +28,10 @@ def recipes(request):
 
     img_list = img_nparray.tolist()
     img_json = json.dumps(img_list)
-    print(img_json)
 
+    recipe_detector_url = 'http://192.168.10.13:5000'
+    response = requests.get(recipe_detector_url)
+    print(response.text)
 
 
 
