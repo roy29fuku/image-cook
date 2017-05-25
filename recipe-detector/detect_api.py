@@ -15,7 +15,6 @@ def hello():
 def detect():
     # TODO: ingre_checker.pyを流用したので複数ファイルチェック用になっているので冗長な部分を削減したい
     request_json = json.loads(request.data)
-    print(request_json)
 
     # fname = 'images/test-tomato.jpg'
     image_size = 50
@@ -33,7 +32,7 @@ def detect():
     # img = Image.open(fname)
     # img = img.convert("RGB")
     # img = img.resize((image_size, image_size))
-    in_data = np.asarray(img)
+    in_data = np.asarray(request_json)
 
     X.append(in_data)
     # files.append(fname)
