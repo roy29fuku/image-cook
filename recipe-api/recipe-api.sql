@@ -1,6 +1,6 @@
 -- MySQL dump 10.16  Distrib 10.1.23-MariaDB, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: kisopro
+-- Host: localhost    Database: ingre
 -- ------------------------------------------------------
 -- Server version	10.1.23-MariaDB
 
