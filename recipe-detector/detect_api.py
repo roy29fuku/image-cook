@@ -13,14 +13,9 @@ def hello():
 
 @app.route('/', methods=['POST'])
 def detect():
-    # TODO: ingre_checker.pyを流用したので複数ファイルチェック用になっているので冗長な部分を削減したい
     request_json = json.loads(request.data)
 
-    # fname = 'images/test-tomato.jpg'
-    image_size = 50
-
     X = []
-    # files = []
     categories = [
         'carrot',
         'onion',
@@ -28,14 +23,11 @@ def detect():
         'tomato',
         'cabbage',
     ]
+    results = []
 
-    # img = Image.open(fname)
-    # img = img.convert("RGB")
-    # img = img.resize((image_size, image_size))
     in_data = np.asarray(request_json)
 
     X.append(in_data)
-    # files.append(fname)
     X = np.array(X)
 
     model = ingre.build_model(X.shape[1:])
@@ -45,9 +37,11 @@ def detect():
 
     for i, p in enumerate(pre):
         y = p.argmax()
-        print("| 食材名:", categories[y])
+        results.append(categories[y])
 
-    return 'hoge'
+    results_json = json.dumps(results, ensure_ascii=False)
+
+    return results_json
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
