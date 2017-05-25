@@ -23,7 +23,7 @@ def recipes(request):
 
     # flask製のAPIにjsonを投げ、検出結果を取得する
     recipe_detector_url = 'http://192.168.10.13:5000'
-    response = requests.get(recipe_detector_url)
+    response = requests.post(recipe_detector_url, data=img_json)
     print(response.text)
 
 
