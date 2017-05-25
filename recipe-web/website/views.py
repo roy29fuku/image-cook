@@ -16,14 +16,18 @@ def recipes(request):
     image.title = request.FILES['pic'].name
     image.data = request.FILES['pic']
     image.save()
-    fname = image.data
+    file_name = image.data
     image_size = 50
 
-    img = Image.open(fname)
+    # 画像-> NumPy array-> json に変換
+    img = Image.open(file_name)
     img = img.convert("RGB")
     img = img.resize((image_size, image_size))
-    in_data = np.asarray(img)
-    print(in_data)
+    img_nparray = np.asarray(img)
+
+    img_list = img_nparray.tolist()
+    img_json = json.dumps(img_list)
+    print(img_json)
 
 
 
