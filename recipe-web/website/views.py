@@ -18,17 +18,10 @@ def recipes(request):
     image.data = request.FILES['pic']
     image.save()
     file_name = image.data
-    image_size = 50
 
-    # 画像-> NumPy array-> json に変換
-    img = Image.open(file_name)
-    img = img.convert("RGB")
-    img = img.resize((image_size, image_size))
-    img_nparray = np.asarray(img)
+    img_json = trans_image_to_json(file_name)
 
-    img_list = img_nparray.tolist()
-    img_json = json.dumps(img_list)
-
+    # flask製のAPIにjsonを投げ、検出結果を取得する
     recipe_detector_url = 'http://192.168.10.13:5000'
     response = requests.get(recipe_detector_url)
     print(response.text)
@@ -83,3 +76,18 @@ def search(S):
     connection.close()
 
     return jsonstring
+
+
+def trans_image_to_json(file_name):
+    '''
+    画像-> NumPy array-> json に変換
+    '''
+    image_size = 50
+    img = Image.open(file_name)
+    img = img.convert("RGB")
+    img = img.resize((image_size, image_size))
+    img_nparray = np.asarray(img)
+    img_list = img_nparray.tolist()
+    img_json = json.dumps(img_list)
+
+    return img_json
