@@ -1,7 +1,5 @@
 from flask import Flask, request
 import json
-import sys, os
-from PIL import Image
 import numpy as np
 import ingre_cnn as ingre
 

@@ -16,7 +16,7 @@ def recipes(request):
     image = ImageFile()
     image.title = request.FILES['pic'].name
     image.data = request.FILES['pic']
-    image.save()
+    # image.save()
     file_name = image.data
 
     img_json = trans_image_to_json(file_name)
@@ -24,11 +24,15 @@ def recipes(request):
     # flask製のAPIにjsonを投げ、検出結果を取得する
     recipe_detector_url = 'http://192.168.10.13:5000'
     response = requests.post(recipe_detector_url, data=img_json)
-    print(response.text)
 
+    # TODO: 今回は単一食材だが、いずれは複数食材のリストが返ってくる
+    ingredients_json = json.loads(response.text)
+    ingredients_list = list(ingredients_json)
+    ingredient = ingredients_list[0]
+    search_word = trans_ing_to_search_word(ingredient)
+    print('検出結果:', ingredient)
 
-
-    recipe_json = search('たまねぎ')
+    recipe_json = search(search_word)
     context = json.loads(recipe_json)
     return render(
         request,
@@ -91,3 +95,33 @@ def trans_image_to_json(file_name):
     img_json = json.dumps(img_list)
 
     return img_json
+
+def trans_ing_to_search_word(ingredient):
+    '''
+    recipe-detectorから英語で返ってきた食材名を
+    レシピ検索に合わせた日本語に変換
+    '''
+    ings = [
+        'carrot',
+        'onion',
+        'radish',
+        'tomato',
+        'cabbage',
+    ]
+    words = [
+        'にんじん',
+        'たまねぎ',
+        '大根',
+        'トマト',
+        'キャベツ',
+    ]
+
+    result = ''
+    try:
+        index = ings.index(ingredient)
+        result = words[index]
+    except:
+        pass
+
+    return result
+
