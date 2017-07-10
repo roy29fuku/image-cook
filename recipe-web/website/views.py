@@ -1,3 +1,4 @@
+import importlib
 import random
 import json
 import requests
@@ -6,6 +7,7 @@ from PIL import Image
 import numpy as np
 from django.shortcuts import render
 from .models import ImageFile
+local_settings = importlib.import_module(".local_settings", "recipe-web")
 
 def index(request):
     return render(request, 'website/index.html')
@@ -22,7 +24,7 @@ def recipes(request):
     img_json = trans_image_to_json(file_name)
 
     # flask製のAPIにjsonを投げ、検出結果を取得する
-    recipe_detector_url = 'http://192.168.10.13:5000'
+    recipe_detector_url = local_settings.FOOD_URL
     response = requests.post(recipe_detector_url, data=img_json)
 
     # TODO: 今回は単一食材だが、いずれは複数食材のリストが返ってくる
