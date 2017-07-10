@@ -26,7 +26,6 @@ image_size = 50
 X = []
 Y = []
 def add_sample(cat, fname, is_train):
-    global count
     img = Image.open(fname)
     img = img.convert("RGB")
     img = img.resize((image_size, image_size))
